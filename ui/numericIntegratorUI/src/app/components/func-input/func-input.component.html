@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-form-field appearance="outline">
+    <mat-label>Fucntion</mat-label>
+    <input matInput>
+  </mat-form-field>
+
+  <br>
+  <mat-form-field>
+    <mat-label>Integration Method</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let option of this.integrationOptions" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <br><br>
+  <button mat-stroked-button>Integrate</button>
+</mat-card>

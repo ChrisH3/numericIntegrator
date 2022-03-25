@@ -10,6 +10,7 @@ export class FuncInputComponent implements OnInit {
 
 	public function: string = "";
 	public showOptions: boolean = true;
+	public integrationOption: string = "";
 	public integrationOptions: string[] = [
 		"Simpson's Method",
 		"Romberg Method",
@@ -22,4 +23,18 @@ export class FuncInputComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
+
+	public onFunctionChange() {
+		console.log(this.function)
+	}
+
+	public onButtonClick() {
+		console.log("Integrate!")
+		console.log(this.function);
+		console.log(this.integrationOption);
+
+    this.integrationService.integrate(this.function, this.integrationOption).subscribe((response) => {
+      console.log(response);
+    });
+	}
 }

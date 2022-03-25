@@ -1,13 +1,13 @@
 <mat-card>
   <mat-form-field appearance="outline">
     <mat-label>Fucntion</mat-label>
-    <input matInput>
+    <input matInput (change)="onFunctionChange()" [(ngModel)]="function">
   </mat-form-field>
 
   <br>
   <mat-form-field>
     <mat-label>Integration Method</mat-label>
-    <mat-select>
+    <mat-select [(ngModel)]="integrationOption">
       <mat-option *ngFor="let option of this.integrationOptions" [value]="option">
         {{option}}
       </mat-option>
@@ -15,5 +15,5 @@
   </mat-form-field>
 
   <br><br>
-  <button mat-stroked-button>Integrate</button>
+  <button mat-stroked-button (click)="onButtonClick()">Integrate</button>
 </mat-card>

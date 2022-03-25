@@ -12,7 +12,7 @@ export class IntegrationService {
   public integrate(func: string, method: string) {
     let queryParams = new HttpParams({
       fromObject: {
-        function: func,
+        function: func.replaceAll("+", "%2B"),
         method: method
       }
     })

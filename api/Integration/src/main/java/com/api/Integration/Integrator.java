@@ -1,10 +1,16 @@
 package com.api.Integration;
 
+import com.udojava.evalex.Expression;
+import com.udojava.evalex.ExpressionSettings;
+
 public class Integrator
 {
-	public Integrator(String funcStr) throws ScriptException
+	private Expression expression;
+	
+	public Integrator(String function)
 	{
-
+		ExpressionSettings settings = ExpressionSettings.builder().powerOperatorPrecedenceHigher().build();
+		expression = new Expression(function.replaceAll("%2B", "+"), settings);
 	}
 
 	public double integrate(String method, double a, double b)
@@ -25,10 +31,9 @@ public class Integrator
 	}
 
 
-	// Temporarily hard coded function to test the api
 	private double f(double x)
 	{
-		return 2*x + 3;
+		return expression.with("x", ""+x).eval().doubleValue();
 	}
 
 

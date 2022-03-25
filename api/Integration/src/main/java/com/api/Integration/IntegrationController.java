@@ -17,12 +17,7 @@ public class IntegrationController
 	public Double integrate(@RequestParam(value="function", defaultValue = "") String function,
 	                       @RequestParam(value="method", defaultValue = "") String method)
 	{
-		try {
-			Integrator integrator = new Integrator(function);
-			return integrator.integrate(method, 0, 1);
-		}catch (Exception e) {
-			System.out.println(e);
-			return 0.0;
-		}
+		Integrator integrator = new Integrator(function);
+		return integrator.integrate(method, 0, 1);
 	}
 }

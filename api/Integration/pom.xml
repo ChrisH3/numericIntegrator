@@ -33,6 +33,13 @@
 			<artifactId>httpclient</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.udojava</groupId>
+			<artifactId>EvalEx</artifactId>
+			<!-- change to desired version -->
+			<version>2.7</version>
+		</dependency>
 	</dependencies>
 
 	<build>

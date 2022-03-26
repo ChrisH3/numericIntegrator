@@ -1,0 +1,49 @@
+<mat-grid-list cols="2" rowHeight="2:1">
+	<mat-grid-tile>
+		<mat-card style="width:100%; height: 100%">
+			<mat-form-field appearance="outline">
+				<mat-label>Function</mat-label>
+				<input matInput (change)="onFunctionChange()" [(ngModel)]="function">
+			</mat-form-field>
+
+			<br>
+			<mat-form-field appearance="outline" style="width:100px !important">
+				<mat-label>a</mat-label>
+				<input matInput [(ngModel)]="a">
+			</mat-form-field>
+			<mat-form-field appearance="outline" style="width:100px !important">
+				<mat-label>b</mat-label>
+				<input matInput [(ngModel)]="b">
+			</mat-form-field>
+
+			<br>
+			<mat-form-field>
+				<mat-label>Integration Method</mat-label>
+				<mat-select [(ngModel)]="integrationOption">
+					<mat-option *ngFor="let option of this.integrationOptions" [value]="option">
+						{{option}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+
+			<br>
+			<button mat-stroked-button (click)="onSettingsButtonClick()">Integration Settings</button>
+			<br><br>
+			<button mat-stroked-button (click)="onButtonClick()">Integrate</button>
+		</mat-card>
+	</mat-grid-tile>
+
+	<mat-grid-tile>
+		<mat-card style="width:100%; height: 100%">
+			<app-func-output [value]="this.output"></app-func-output>
+		</mat-card>
+	</mat-grid-tile>
+
+</mat-grid-list>
+
+
+<mat-card *ngIf="this.showSettings && this.integrationOption">
+	<app-integration-settings [method]="this.integrationOption"
+	                          (updateSettings)="this.onSettingsUpdate($event)"></app-integration-settings>
+</mat-card>

@@ -15,9 +15,11 @@ public class IntegrationController
 {
 	@GetMapping("")
 	public Double integrate(@RequestParam(value="function", defaultValue = "") String function,
-	                       @RequestParam(value="method", defaultValue = "") String method)
+	                        @RequestParam(value="a", defaultValue = "") String a,
+	                        @RequestParam(value="b", defaultValue = "") String b,
+	                        @RequestParam(value="method", defaultValue = "") String method)
 	{
 		Integrator integrator = new Integrator(function);
-		return integrator.integrate(method, 0, 1);
+		return integrator.integrate(method, Double.parseDouble(a), Double.parseDouble(b));
 	}
 }

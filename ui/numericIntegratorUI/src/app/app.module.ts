@@ -10,13 +10,16 @@ import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import {MatGridListModule} from '@angular/material/grid-list';
 import { FormsModule } from '@angular/forms';
+import { FuncOutputComponent } from './func-output/func-output.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FuncInputComponent
+    FuncInputComponent,
+    FuncOutputComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +30,7 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatGridListModule,
     FormsModule
   ],
   providers: [],

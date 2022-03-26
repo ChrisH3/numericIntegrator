@@ -9,10 +9,12 @@ export class IntegrationService {
   constructor(private http: HttpClient) { }
 
 
-  public integrate(func: string, method: string) {
+  public integrate(func: string, a: string, b: string, method: string) {
     let queryParams = new HttpParams({
       fromObject: {
         function: func.replaceAll("+", "%2B"),
+        a: a,
+        b: b,
         method: method
       }
     })

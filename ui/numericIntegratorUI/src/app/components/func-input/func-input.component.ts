@@ -8,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FuncInputComponent implements OnInit {
 
+  public output: string = "";
 	public function: string = "";
+  public a: string = "";
+  public b: string = "";
 	public showOptions: boolean = true;
 	public integrationOption: string = "";
 	public integrationOptions: string[] = [
@@ -17,6 +20,7 @@ export class FuncInputComponent implements OnInit {
 		"Gaussian Quadrature",
 		"Adaptive Quadrature"
 	];
+
 
 	constructor(private integrationService :IntegrationService) { }
 
@@ -29,12 +33,8 @@ export class FuncInputComponent implements OnInit {
 	}
 
 	public onButtonClick() {
-		console.log("Integrate!")
-		console.log(this.function);
-		console.log(this.integrationOption);
-
-    this.integrationService.integrate(this.function, this.integrationOption).subscribe((response) => {
-      console.log(response);
+    this.integrationService.integrate(this.function, this.a, this.b, this.integrationOption).subscribe((response) => {
+      this.output = "" + response;
     });
 	}
 }

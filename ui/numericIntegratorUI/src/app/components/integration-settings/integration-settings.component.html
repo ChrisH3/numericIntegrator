@@ -1,0 +1,7 @@
+
+<div>
+	<mat-form-field *ngFor="let option of this.settings | keyvalue">
+		<mat-label>{{option.key}}</mat-label>
+		<input id="{{option.key}}" matInput value="{{option.value}}" #input (change)="this.onSettingsChange(option.key, input.value)">
+	</mat-form-field>
+</div>

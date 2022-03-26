@@ -2,6 +2,7 @@ package com.api.Integration;
 
 import com.udojava.evalex.Expression;
 import com.udojava.evalex.ExpressionSettings;
+import java.util.Map;
 
 public class Integrator
 {
@@ -13,18 +14,18 @@ public class Integrator
 		expression = new Expression(function.replaceAll("%2B", "+"), settings);
 	}
 
-	public double integrate(String method, double a, double b)
+	public double integrate(String method, double a, double b, Map<String, String> settings)
 	{
 		switch (method)
 		{
 			case "Simpson's Method":
-				return simpsons(a, b);
+				return simpsons(a, b, Integer.parseInt(settings.get("numSteps")));
 			case "Romberg Method":
-				return romberg(a, b, 0.01, 20);
+				return romberg(a, b, Double.parseDouble(settings.get("tolerance")), Integer.parseInt(settings.get("maxIterations")));
 			case "Gaussian Quadrature":
-				return gaussianQuadrature(a, b, 100);
+				return gaussianQuadrature(a, b, Integer.parseInt(settings.get("numSteps")));
 			case "Adaptive Quadrature":
-				return adaptiveQuadrature(a, b, 0.01);
+				return adaptiveQuadrature(a, b, Double.parseDouble(settings.get("tolerance")));
 		}
 
 		return 0;
@@ -38,11 +39,23 @@ public class Integrator
 
 
 
-
+	// Single Step of simpsons method
 	private double simpsons(double a, double b)
 	{
 		double h = (b - a) / 2;
 		return (h/3) * (f(a) + 4*f(a+h) + f(b));
+	}
+
+	// Simpson's method calculated over multiple smaller intervals
+	private double simpsons(double a, double b, int numSteps)
+	{
+		double area = 0;
+		double dx = (b-a) / numSteps;
+		
+		for(int i = 0; i < numSteps; i++) {
+			area += simpsons(a + i*dx, a + (i+1)*dx);
+		}
+		return area;
 	}
 
 
@@ -89,7 +102,7 @@ public class Integrator
 		double dx = (b-a) / numSteps;
 		
 		for(int i = 0; i < numSteps; i++) {
-			area += g(-gaussianRoot, i*dx, (i+1)*dx) + g(gaussianRoot, i*dx, (i+1)*dx);
+			area += g(-gaussianRoot, a + i*dx, a + (i+1)*dx) + g(gaussianRoot, a + i*dx, a + (i+1)*dx);
 		}
 		return area;
 	}
